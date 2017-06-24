@@ -9,10 +9,19 @@ void listInit(LinkedList *list) {
 
 void listAdd(LinkedList *list,Item *item){
     // Implement your code here...
-    
+    if(list->len == 0)
+    {
     list->head = item;
     list->tail = item;
-    list->len = 1;
-    item->next = NULL;
+    
+    
+    }
+    else
+    {
+      list->tail=item;
+      
+    }
+    list->len += 1;
+    item->next=NULL;
     
 }

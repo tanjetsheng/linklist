@@ -9,7 +9,7 @@ void tearDown(void)
 {
 }
 
-void test_student_(void)
+void test_student(void)
 {
     Student Ali = {
       "Ali",

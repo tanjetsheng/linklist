@@ -28,45 +28,55 @@ void test_listInit_ensure_initialized_to_NULL_and_0(void){
 
 void test_listAdd_given_linked_list_with_ali_then_add_baba_expect_2_items_in_list(void){
   LinkedList list;
-  
-  list.head = &item;
-  list.tail = &item;
-  list.len = 1;
-  item.next = NULL;
-  itemBaba.next = (Item *)-1;
-  
-  LinkedList list;
-    Student Ali = {
+   struct Student Ali = {
       "Ali",                        //name
       23,                           //age
       72.35,                        //weight
       1.78                          //height  
     };
-    Item item = {
+    struct Item itemali = {
       (Item *)-1,                   //next
       (void *)&Ali                 //data
     };
-     Student Baba = {
+    struct Student Baba = {
       "Baba",                        //name
       26,                           //age
       75.35,                        //weight
       1.83                          //height  
     };
-    Item item = {
+    struct Student Abu ={
+      "Abu",
+      25,
+      60.23,
+      1.80
+    };
+    struct Item itembaba = {
       (Item *)-1,                   //next
       (void *)&Baba                 //data
     };
+    struct Item itemAbu = {
+      (Item *)-1,                   //next
+      (void *)&Abu                //data
+    };
   
-     printf("address of ite: %p\n", &item);
+     printf("address of itemali: %p\n", &itemali);
+     printf("address of itembaba: %p\n", &itembaba);
+     printf("address of itembaba: %p\n", &itemAbu);
+     
+  listInit(&list);
+  listAdd(&list,&itemali);
+  listAdd(&list,&itembaba);
+  listAdd(&list,&itemAbu);
+
+  TEST_ASSERT_EQUAL_PTR(&itemali,list.head);
+  TEST_ASSERT_EQUAL_PTR(&itembaba,list.tail);
+  TEST_ASSERT_EQUAL(3,list.len);
+  TEST_ASSERT_EQUAL_PTR(&Ali,itemali.data);
+  TEST_ASSERT_EQUAL_PTR(&Baba,itembaba.data);
+  TEST_ASSERT_EQUAL_PTR(&Abu,itemAbu.data);  
+  TEST_ASSERT_NULL(itemAbu.next);
+
   
-  listAdd(&list,&itemBaba);
-  TEST_ASSERT_EQUAL_PTR(&item,list.head);
-  TEST_ASSERT_EQUAL_PTR(&itemBaba,list.tail);
-  TEST_ASSERT_EQUAL(2,list.len);
-  TEST_ASSERT_EQUAL_PTR(&itemBaba,item.next);
-  TEST_ASSERT_EQUAL_PTR(&Ali,item.data);
-  TEST_ASSERT_NULL(itemBaba.next);
-  TEST_ASSERT_EQUAL_PTR(&Baba,itemBaba.data);
 }
 /*  
 void test_listAdd_given_an_empty_linked_list_then_add_Ali_expect_1_item_in_list(void)
