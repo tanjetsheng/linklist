@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "linkedlist.h"
+#include "student.h"
+#include <string.h>
 
 void listInit(LinkedList *list) {
   list->head = NULL;
@@ -18,6 +20,7 @@ void listAdd(LinkedList *list,Item *item){
     }
     else
     {
+	  list->tail->next=item;	
       list->tail=item;
       
     }
@@ -25,3 +28,40 @@ void listAdd(LinkedList *list,Item *item){
     item->next=NULL;
     
 }
+
+Item *LinkRemove(LinkedList *list,char *name){
+	Item *current = list->head;
+	Item *previous = NULL;
+	
+	if(list->head==NULL){
+		return NULL;
+	}
+	
+	else if(list->head==list->tail){   //first head 
+		listInit(list);
+	}
+	
+	
+	
+	else{
+		while(strcmp(((Student*)current->data)->name,name)!=0){
+			previous = current;
+			current = current->next;
+		}
+	}
+	if(current ==NULL){
+		return NULL;
+	}
+	else if(current ==list->tail){
+		list->tail=previous;
+		list->tail->next=NULL;
+		list->len--;
+	}
+	else{
+		previous->next = current->next;
+		list->len--;
+	}
+		
+}
+	
+	
